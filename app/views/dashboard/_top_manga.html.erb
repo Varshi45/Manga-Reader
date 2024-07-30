@@ -1,0 +1,46 @@
+<h1 class="text-2xl mt-2 font-bold mb-4">Top Rated Manga</h1>
+<div class="w-full overflow-x-auto scrollbar-hide">
+  <div class="flex space-x-4">
+    <% @top_mangas.each do |manga| %>
+      <div class="bg-white p-4 shadow rounded-lg min-w-[250px]">
+        <% if manga.images.any? %>
+          <%= image_tag manga.images.first.link, class: "w-full h-90 object-cover rounded-lg mb-2" %>
+        <% end %>
+        <h2 class="text-xl font-semibold mb-2">
+          <%= link_to manga.title, manga_path(manga), class: "text-blue-500 hover:text-blue-700" %>
+        </h2>
+        <p class="text-gray-600 mb-2">
+          Rating: <%= number_with_precision(manga.average_rating, precision: 1) %> / 5
+        </p>
+        <div class="mt-2">
+          <% if manga.category.present? %>
+            <div class="flex flex-wrap gap-2">
+              <% manga.category.each do |cat| %>
+                <% color = case cat.downcase
+                  when 'fiction' then 'bg-blue-200'
+                  when 'adventure' then 'bg-green-200'
+                  when 'fantasy' then 'bg-purple-200'
+                  when 'action' then 'bg-red-200'
+                  when 'sports' then 'bg-yellow-200'
+                  when 'romance' then 'bg-pink-200'
+                  when 'mystery' then 'bg-indigo-200'
+                  when 'horror' then 'bg-cyan-400'
+                  when 'sci-fi' then 'bg-teal-200'
+                  when 'comedy' then 'bg-orange-200'
+                  when 'drama' then 'bg-gray-200'
+                  when 'slice of life' then 'bg-lime-200'
+                  else 'bg-gray-200'
+                end %>
+                <span class="px-3 py-1 rounded-full text-sm font-medium <%= color %>">
+                  <%= cat %>
+                </span>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="text-gray-500">No categories available.</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

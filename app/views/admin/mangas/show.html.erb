@@ -1,0 +1,80 @@
+<!-- app/views/admin/mangas/show.html.erb -->
+
+<div class="bg-white p-6 rounded-lg shadow-lg grid grid-cols-5 gap-6">
+  <!-- Poster -->
+  <div class="col-span-2">
+    <!-- Add poster display -->
+    <% if @manga.images.any? && @manga.images.first.link.present? %>
+      <div class="col-span-2 mb-2">
+        <%= image_tag @manga.images.first.link, class: "w-full h-auto rounded-lg shadow-md object-cover" %>
+      </div>
+    <% else %>
+      <p class="text-gray-500">No poster available.</p>
+    <% end %>
+  </div>
+
+  <!-- Title, Author, Published Date, Description, Rating, Categories -->
+  <div class="col-span-3">
+    <h1 class="text-4xl mb-4 font-semibold"><%= @manga.title %></h1>
+    <p class="text-lg mb-2 font-medium text-gray-800">by <%= @manga.author %></p>
+    <p class="text-gray-500 mb-4">Published on <%= @manga.first_published_date.strftime("%B %d, %Y") %></p>
+
+    <p class="text-gray-700">
+      <span class="font-semibold">Rating:</span> <%= @manga.average_rating.round(1) %> / 5
+    </p>
+    <p class="text-gray-600 mb-4"><%= @manga.description %></p>
+
+    <!-- Categories -->
+    <% if @manga.category.present? %>
+      <div class="flex flex-wrap gap-2">
+        <% @manga.category.each do |cat| %>
+          <% color = case cat.downcase
+            when 'fiction' then 'bg-blue-200'
+            when 'adventure' then 'bg-green-200'
+            when 'fantasy' then 'bg-purple-200'
+            when 'action' then 'bg-red-200'
+            when 'sports' then 'bg-yellow-200'
+            when 'romance' then 'bg-pink-200'
+            when 'mystery' then 'bg-indigo-200'
+            when 'horror' then 'bg-cyan-400'
+            when 'sci-fi' then 'bg-teal-200'
+            when 'comedy' then 'bg-orange-200'
+            when 'drama' then 'bg-gray-200'
+            when 'slice of life' then 'bg-lime-200'
+            else 'bg-gray-200'
+          end %>
+          <span class="px-3 py-1 rounded-full text-sm font-medium <%= color %>">
+            <%= cat %>
+          </span>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-gray-500">No categories available.</p>
+    <% end %>
+
+    <!-- Actions -->
+    <div class="mt-6 flex space-x-4">
+      <%= link_to 'Edit', edit_admin_manga_path(@manga), class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+      <%= link_to 'Back to Dashboard', admin_dashboard_path, class: "text-blue-500 underline" %>
+    </div>
+  </div>
+
+  <!-- Display Comments -->
+  <div class="col-span-5 mt-6">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl mb-2 font-semibold">Comments</h2>
+      <% if @manga.comments.any? %>
+        <ul class="list-disc pl-5 space-y-3">
+          <% @manga.comments.each do |comment| %>
+            <li class="text-gray-700">
+              <strong><%= comment.user.email %>:</strong> <%= comment.content %>
+              <p class="text-gray-500 text-sm"><%= comment.created_at.strftime("%B %d, %Y %I:%M %p") %></p>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-500">No comments available.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

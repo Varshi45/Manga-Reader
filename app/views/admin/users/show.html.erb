@@ -1,0 +1,45 @@
+<!-- app/views/admin/users/show.html.erb -->
+<h1 class="text-4xl font-bold mb-6 text-gray-800">User Details</h1>
+
+<div class="mt-6 max-w-4xl mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+  <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
+    <h2 class="text-2xl font-semibold mb-2 text-gray-700">Email: <%= @user.email %></h2>
+    <p class="text-gray-600">Created at: <%= @user.created_at.strftime("%B %d, %Y") %></p>
+  </div>
+
+  <div class="mt-6">
+    <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Ratings</h3>
+    <% if @recent_ratings.any? %>
+      <ul class="list-disc pl-5 space-y-2">
+        <% @recent_ratings.each do |rating| %>
+          <li class="flex items-center space-x-2">
+            <div class="flex-1">
+              <span class="font-semibold">Manga:</span> <%= link_to rating.manga.title, admin_manga_path(rating.manga), class: "text-blue-500 hover:underline" %>
+            </div>
+            <span class="text-gray-600">- Rating: <%= rating.rating %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500">No ratings available.</p>
+    <% end %>
+  </div>
+
+  <div class="mt-6">
+    <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Comments</h3>
+    <% if @recent_comments.any? %>
+      <ul class="list-disc pl-5 space-y-2">
+        <% @recent_comments.each do |comment| %>
+          <li class="flex items-center space-x-2">
+            <div class="flex-1">
+              <span class="font-semibold">Manga:</span> <%= link_to comment.manga.title, admin_manga_path(comment.manga), class: "text-blue-500 hover:underline" %>
+            </div>
+            <span class="text-gray-600">- Comment: <%= comment.content.truncate(100) %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-500">No comments available.</p>
+    <% end %>
+  </div>
+</div>

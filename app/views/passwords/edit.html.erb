@@ -1,0 +1,36 @@
+<!-- app/views/passwords/edit.html.erb -->
+<h1 class="text-2xl font-bold mb-6">Update Password</h1>
+
+<%= form_with model: current_user, url: password_path do |form| %>
+  <% if form.object.errors.any? %>
+    <div id="error_explanation" class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700">
+      <h2 class="font-bold"><%= pluralize(form.object.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% form.object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container m-2 p-4 bg-white shadow rounded">
+    <div class="field mb-4">
+      <%= form.label :password_challenge, "Current Password", class: "block font-medium text-sm text-gray-700" %>
+      <%= form.password_field :password_challenge, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm" %>
+    </div>    
+
+    <div class="field mb-4">
+      <%= form.label :password, "New Password", class: "block font-medium text-sm text-gray-700" %>
+      <%= form.password_field :password, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="field mb-4">
+      <%= form.label :password_confirmation, class: "block font-medium text-sm text-gray-700" %>
+      <%= form.password_field :password_confirmation, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Update password", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<!-- app/views/sessions/new.html.erb -->
+<h1 class="text-4xl">Log In</h1>
+
+<%= form_with url: sessions_path, scope: :user, local: true do |form| %>
+  <div class="container m-2 p-4">
+    <div class="field">
+      <%= form.label :email, class: "block text-gray-700" %>
+      <%= form.email_field :email, class: "mt-1 block w-full" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password, class: "block text-gray-700" %>
+      <%= form.password_field :password, class: "mt-1 block w-full" %>
+    </div>
+
+    <div class="actions mt-4">
+      <%= form.submit "Log In", class: "bg-blue-500 text-white py-2 px-4 rounded" %>
+    </div>
+  </div>
+<% end %>
+
+<div >
+<div class="mt-4 text-center">
+  <p class="text-gray-700"><%= link_to "Forgot Password?", new_password_reset_path, class: "text-blue-500" %></p>
+</div>
+
+<div class="mt-4 text-center">
+  <p class="text-gray-700">New user? <%= link_to 'Sign Up', new_registration_path, class: "text-blue-500" %></p>
+</div>
+</div>
+
+

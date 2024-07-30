@@ -1,0 +1,29 @@
+<!-- app/views/admin/users/index.html.erb -->
+<h1 class="text-4xl font-bold mb-6 text-gray-800">User List</h1>
+
+<div class="mt-6 max-w-6xl mx-auto px-4">
+  <% if @users.any? %>
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-3 px-6 text-left text-gray-600 font-semibold">Email</th>
+            <th class="py-3 px-6 text-left text-gray-600 font-semibold">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @users.each do |user| %>
+            <tr>
+              <td class="py-3 px-6 text-gray-800"><%= user.email %></td>
+              <td class="py-3 px-6">
+                <%= link_to 'View Details', admin_user_path(user), class: "text-blue-500 hover:text-blue-700 hover:underline" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="text-gray-500">No users available.</p>
+  <% end %>
+</div>

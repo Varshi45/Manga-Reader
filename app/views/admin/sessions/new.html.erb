@@ -1,0 +1,20 @@
+<!-- app/views/admin/sessions/new.html.erb -->
+<h1 class="text-4xl">Admin Log In</h1>
+
+<%= form_with url: admin_sessions_path, local: true do |form| %>
+  <div class="container m-2 p-4">
+    <div class="field">
+      <%= form.label :email, class: "block text-gray-700" %>
+      <%= form.email_field :email, name: 'user[email]', class: "mt-1 block w-full" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password, class: "block text-gray-700" %>
+      <%= form.password_field :password, name: 'user[password]', class: "mt-1 block w-full" %>
+    </div>
+
+    <div class="actions mt-4">
+      <%= form.submit "Log In", class: "bg-blue-500 text-white py-2 px-4 rounded" %>
+    </div>
+  </div>
+<% end %>

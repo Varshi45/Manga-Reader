@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MangaReader</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Function to fade out elements
+        function fadeOut(element, delay) {
+          if (element) {
+            setTimeout(function() {
+              element.classList.add('opacity-0');
+              element.classList.add('transition-opacity');
+              element.classList.add('duration-1000');
+              setTimeout(function() {
+                element.style.display = 'none';
+              }, 1000); // Match the duration with the transition
+            }, delay);
+          }
+        }
+
+        // Apply fade out effect to notices and alerts
+        const notice = document.querySelector('.notice');
+        const alert = document.querySelector('.alert');
+
+        fadeOut(notice, 3000); // 3 seconds delay
+        fadeOut(alert, 3000); // 3 seconds delay
+      });
+    </script>
+  </head>
+
+  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <nav class="bg-white shadow-md mb-6 w-full border-b border-gray-200">
+      <div class="container mx-auto px-6 py-6 flex justify-between items-center">
+        <div>
+          <%= link_to "MangaReader", root_path, class: "text-2xl font-bold text-gray-800 hover:text-blue-600 transition" %>
+        </div>
+        <div class="flex space-x-6">
+          <% if user_signed_in? %>
+            <!-- Dashboard Button -->
+            <%= link_to "Dashboard", (current_user.admin? ? admin_dashboard_path : user_dashboard_path), class: "bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300" %>
+            <%= link_to "Edit Password", edit_password_path(current_user.id), class: "bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition duration-300" %>
+            <%= button_to "Log out", logout_path, method: :delete, class: "bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300", data: { turbo: false } %>
+          <% else %>
+            <%= link_to "Sign Up", new_registration_path, class: "bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300" %>
+            <%= link_to "Log In", new_session_path, class: "bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300" %>
+            <%= link_to "Admin", new_admin_session_path, class: "bg-cyan-400 text-white py-2 px-4 rounded-lg hover:bg-cyan-600 transition duration-300" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    <!-- Notices -->
+    <div class="mb-4 w-full">
+      <% if notice %>
+        <div class="notice bg-green-500 text-white p-4 rounded-lg shadow-md mb-4">
+          <%= notice %>
+        </div>
+      <% end %>
+    </div>
+    <!-- Alerts -->
+    <div class="mb-4 w-full">
+      <% if alert %>
+        <div class="alert bg-red-500 text-white p-4 rounded-lg shadow-md mb-4">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
+    <main class="container mx-auto mt-28 px-5 flex flex-col justify-center items-center">
+      <%= yield %>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6 mt-10 shadow-lg rounded-t-lg">
+      <div class="container mx-auto px-6 text-center">
+        <p class="mb-4 text-sm">
+          &copy; <%= Time.current.year %> MangaReader. All rights reserved.
+        </p>
+        <p class="text-sm">
+          Built with <span class="text-red-500">&hearts;</span> by <a href="https://www.linkedin.com/in/tej-varshith-madala-6b125b245/" class="hover:underline text-blue-300 hover:text-blue-400">TeJ VarshIth</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

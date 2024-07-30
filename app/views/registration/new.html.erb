@@ -1,0 +1,40 @@
+<!-- app/views/registration/new.html.erb -->
+<h1 class="text-4xl">Sign Up</h1>
+
+<%= form_with model: @user, url: registration_index_path do |form| %>
+  <% if form.object.errors.any? %>
+    <div id="error_explanation">
+      <h2 class="text-red-500"><%= pluralize(form.object.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% form.object.errors.full_messages.each do |message| %>
+          <li class="text-red-500"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container m-2 p-4">
+    <div class="field">
+      <%= form.label :email, class: "block text-gray-700" %>
+      <%= form.email_field :email, class: "mt-1 block w-full" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password, class: "block text-gray-700" %>
+      <%= form.password_field :password, class: "mt-1 block w-full" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password_confirmation, class: "block text-gray-700" %>
+      <%= form.password_field :password_confirmation, class: "mt-1 block w-full" %>
+    </div>
+
+    <div class="actions mt-4">
+      <%= form.submit "Sign Up", class: "bg-blue-500 text-white py-2 px-4 rounded" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="mt-4 text-center">
+  <p class="text-gray-700">Already have an account? <%= link_to 'Log In', new_session_path, class: "text-blue-500" %></p>
+</div>

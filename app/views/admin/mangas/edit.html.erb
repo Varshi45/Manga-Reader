@@ -1,0 +1,98 @@
+<!-- app/views/admin/mangas/edit.html.erb -->
+<div class="bg-white p-6 rounded-lg shadow-lg">
+  <h1 class="text-4xl mb-4 font-semibold">Edit Manga</h1>
+
+  <%= form_with(model: @manga, url: admin_manga_path(@manga), method: :patch, local: true, class: "space-y-4") do |form| %>
+    <div class="field">
+      <%= form.label :title, class: "block text-lg font-medium text-gray-700" %>
+      <%= form.text_field :title, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :author, class: "block text-lg font-medium text-gray-700" %>
+      <%= form.text_field :author, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description, class: "block text-lg font-medium text-gray-700" %>
+      <%= form.text_area :description, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_published_date, class: "block text-lg font-medium text-gray-700" %>
+      <% current_year = Time.current.year %>
+      <%= form.date_select :first_published_date, 
+        { prompt: { day: 'Day', month: 'Month', year: 'Year' }, 
+          start_year: 1950, 
+          end_year: current_year 
+        }, 
+        class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :category, class: "block text-lg font-medium text-gray-700" %>
+      <% subcategories = ['Fiction', 'Action', 'Sports', 'Adventure', 'Romance', 'Mystery', 'Horror', 'Sci-Fi', 'Fantasy', 'Comedy', 'Drama', 'Slice of Life'] %>
+      <% subcategories.each do |subcategory| %>
+        <div class="flex items-center">
+          <%= check_box_tag 'manga[category][]', subcategory, @manga.category.include?(subcategory), class: "mr-2" %>
+          <%= label_tag "manga_category_#{subcategory}", subcategory, class: "text-sm font-medium text-gray-700" %>
+        </div>
+      <% end %>
+      <small class="text-gray-500">Select up to 3 categories</small>
+    </div>
+
+    <div class="field">
+      <%= form.label :images, class: "block text-lg font-medium text-gray-700" %>
+      <%= form.fields_for :images do |image_fields| %>
+        <div class="mt-1 flex items-center">
+          <%= image_fields.text_field :link, placeholder: "Image URL", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+          <%= image_fields.hidden_field :_destroy %>
+          <%= link_to "Remove", "#", class: "text-red-500 ml-2", data: { action: "remove_image" } %>
+        </div>
+      <% end %>
+      <%= link_to "Add Image", "#", class: "text-blue-500 underline", id: "add-image-link" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Update Manga", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+    </div>
+  <% end %>
+
+  <div class="mt-6">
+    <%= link_to 'Back to Dashboard', admin_dashboard_path, class: "text-blue-500 underline" %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+        const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        if (checkedBoxes.length > 3) {
+          this.checked = false;
+        }
+      });
+    });
+
+    const addImageLink = document.getElementById('add-image-link');
+    addImageLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      const template = `<div class="mt-1 flex items-center">
+                          <input placeholder="Image URL" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" type="text" name="manga[images_attributes][][link]" id="manga_images_attributes_new_link">
+                          <input type="hidden" name="manga[images_attributes][][_destroy]" value="false">
+                          <a href="#" class="text-red-500 ml-2" data-action="remove_image">Remove</a>
+                        </div>`;
+      addImageLink.insertAdjacentHTML('beforebegin', template);
+    });
+
+    document.body.addEventListener('click', function(e) {
+      if (e.target.dataset.action === 'remove_image') {
+        e.preventDefault();
+        const field = e.target.closest('.mt-1');
+        field.querySelector('input[type="hidden"]').value = "true";
+        field.style.display = 'none';
+      }
+    });
+  });
+</script>

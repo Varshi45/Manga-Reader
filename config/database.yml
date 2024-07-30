@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost # Uncomment and set if necessary
+  port: 5432 # Uncomment and set if necessary
+
+development:
+  <<: *default
+  database: manga_dev
+  # Uncomment and set if using specific PostgreSQL roles
+  username: postgres
+  password: 1234
+
+test:
+  <<: *default
+  database: manga_test
+  username: postgres
+  password: 1234
+# production:
+#   <<: *default
+#   database: manga_prod
+#   username: <%= ENV["MANGA_AGGREGATOR_DATABASE_USERNAME"] %>
+#   password: <%= ENV["MANGA_AGGREGATOR_DATABASE_PASSWORD"] %>
+# Uncomment and set if using specific PostgreSQL roles
+# host: your_production_db_host
+# port: your_production_db_port
