@@ -1,6 +1,6 @@
 class ChangeCategoryToArrayInMangas < ActiveRecord::Migration[7.1]
   def change
-    remove_column :mangas, :category, :string
+    rename_column :mangas, :subcategories, :category
     add_column :mangas, :category, :string, array: true, default: []
   end
 end
