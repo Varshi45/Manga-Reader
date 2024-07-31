@@ -4,6 +4,7 @@ class Manga < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
+  has_many :chapters, dependent: :destroy
 
   # Ensure ratings are between 0 and 5
   validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }

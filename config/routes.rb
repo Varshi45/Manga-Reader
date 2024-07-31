@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :mangas, only: [] do
     resources :comments, only: [:create, :edit, :update, :destroy]
+    resources :chapters, only: [:index]
   end
 
   root "main#index"

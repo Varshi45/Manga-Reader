@@ -34,15 +34,6 @@ mangas = [
     views_count: 7
   },
   {
-    title: "One-Punch Man",
-    author: "One",
-    first_published_date: "2012-06-12",
-    description: "The story of Saitama, a hero that does it just for fun & can defeat his enemies with a single punch.",
-    category: ["Action", "Comedy"],
-    rating: 0.0,
-    views_count: 1
-  },
-  {
     title: "Demon Slayer: Kimetsu no Yaiba",
     author: "Koyoharu Gotouge",
     first_published_date: "2016-02-15",
@@ -82,7 +73,7 @@ images = [
   },
   {
     link: "https://m.media-amazon.com/images/M/MV5BNjRiNmNjMmMtN2U2Yi00ODgxLTk3OTMtMmI1MTI1NjYyZTEzXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg",
-    manga_id: Manga.find_by(title: "One-Punch Man").id
+    manga_id: Manga.find_by(title: "Death Note").id
   },
   {
     link: "https://m.media-amazon.com/images/M/MV5BZjZjNzI5MDctY2Y4YS00NmM4LTljMmItZTFkOTExNGI3ODRhXkEyXkFqcGdeQXVyNjc3MjQzNTI@._V1_.jpg",
@@ -105,4 +96,78 @@ images = [
 # Seed the Image records
 images.each do |image|
   Image.find_or_create_by!(link: image[:link], manga_id: image[:manga_id])
+end
+
+# Chapter records to seed
+chapters = [
+  {
+    title: "Chapter-1: To You In 2000 Years",
+    link: "https://mangareader.to/read/attack-on-titan-37/en/chapter-1",
+    manga_id: Manga.find_by(title: "Attack On Titan").id
+  },
+  {
+    title: "Chapter-2: That Day",
+    link: "https://mangareader.to/read/attack-on-titan-37/en/chapter-2",
+    manga_id: Manga.find_by(title: "Attack On Titan").id
+  },
+  {
+    title: "Chapter-3: Night of the Disbanding Ceremony",
+    link: "https://mangareader.to/read/attack-on-titan-37/en/chapter-3",
+    manga_id: Manga.find_by(title: "Attack On Titan").id
+  },
+  {
+    title: "Chapter-4: First Battle",
+    link: "https://mangareader.to/read/attack-on-titan-37/en/chapter-4",
+    manga_id: Manga.find_by(title: "Attack On Titan").id
+  },
+  {
+    title: "Chapter-5: A Dull Glow in the Middle of Despair",
+    link: "https://mangareader.to/read/attack-on-titan-37/en/chapter-5",
+    manga_id: Manga.find_by(title: "Attack On Titan").id
+  },
+  {
+    title: "Chapter-6: The World That the Girl Saw",
+    link: "https://mangareader.to/read/attack-on-titan-37/en/chapter-6",
+    manga_id: Manga.find_by(title: "Attack On Titan").id
+  },
+  {
+    title: "Chapter-7: Small Blade",
+    link: "https://mangareader.to/read/attack-on-titan-37/en/chapter-7",
+    manga_id: Manga.find_by(title: "Attack On Titan").id
+  },
+  {
+    title: "Chapter-8: Roar",
+    link: "https://mangareader.to/read/attack-on-titan-37/en/chapter-8",
+    manga_id: Manga.find_by(title: "Attack On Titan").id
+  },
+  {
+    title: "Chapter-1: The End of Adventure",
+    link: "https://mangareader.to/read/frieren-beyond-journeys-end-72/en/chapter-1",
+    manga_id: Manga.find_by(title: "Frieren: Beyond Journey's End").id
+  },
+  {
+    title: "Chapter-2: The Priest's Life",
+    link: "https://mangareader.to/read/frieren-beyond-journeys-end-72/en/chapter-2",
+    manga_id: Manga.find_by(title: "Frieren: Beyond Journey's End").id
+  },
+  {
+    title: "Chapter-3: A Place for Happiness",
+    link: "https://mangareader.to/read/frieren-beyond-journeys-end-72/en/chapter-3",
+    manga_id: Manga.find_by(title: "Frieren: Beyond Journey's End").id
+  },
+  {
+    title: "Chapter-4: The Trial of the Witch",
+    link: "https://mangareader.to/read/frieren-beyond-journeys-end-72/en/chapter-4",
+    manga_id: Manga.find_by(title: "Frieren: Beyond Journey's End").id
+  },
+  {
+    title: "Chapter-5: Memories",
+    link: "https://mangareader.to/read/frieren-beyond-journeys-end-72/en/chapter-5",
+    manga_id: Manga.find_by(title: "Frieren: Beyond Journey's End").id
+  }
+]
+
+# Seed the Chapter records
+chapters.each do |chapter|
+  Chapter.find_or_create_by!(title: chapter[:title], link: chapter[:link], manga_id: chapter[:manga_id])
 end
