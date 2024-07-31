@@ -1,4 +1,3 @@
-````markdown
 # Manga Aggregator Application
 
 ## Description
@@ -20,11 +19,11 @@ This application is built with Ruby 3.2.0 and Rails 7.0.0. Ensure you have the c
 ## Configuration
 
 1. **Clone the repository:**
+
    ```bash
-   git clone https://github.com/varhi45/Manga-Reader.git
+   git clone https://github.com/varshi45/Manga-Reader.git
    cd Manga-Reader
    ```
-````
 
 2. **Install the required gems:**
 
