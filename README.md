@@ -4,6 +4,25 @@
 
 This application is a manga aggregator built using Ruby on Rails 7. It allows users to browse, rate, and comment on various manga titles. The application is styled using Tailwind CSS and integrates PostgreSQL for database management.
 
+## Features Checklist
+
+- [x] An admin panel to upload the mangas
+- [x] Distinctive fields to fill the title of the manga being uploaded, the author, date of first publishing, and description of the manga
+- [x] Admin can upload the manga from the admin panel
+- [x] Feature to upload new chapters whenever the admin desires
+- [x] Manga categories to determine the genre of the manga
+- [x] Homepage displaying all available mangas with a search bar
+- [x] Display trending mangas on the homepage
+- [x] View detailed information when a user clicks on a manga
+- [x] Users can like and comment on the mangas
+- [x] Read mangas in a paginated way with a page read tracker
+- [x] Track likes on the manga, users can rate manga out of 5 stars
+
+### Additional Requirements (Nice to Have)
+
+- [ ] Recommend manga to a user based on their past interests in some genre
+- [x] Data analytics for the admin to determine which mangas are being read the most by the users and other such details
+
 ## Ruby Version
 
 This application is built with Ruby 3.2.0 and Rails 7.0.0. Ensure you have the correct version installed to run the application.
@@ -89,6 +108,7 @@ rails test
    - Run deployment tasks such as `rails db:migrate` and `rails assets:precompile`.
 
 3. **Start the application server:**
+
    ```bash
    rails server
    ```
@@ -98,5 +118,6 @@ rails test
 - For local development, ensure that you have the appropriate version of Ruby and Rails installed.
 - Review the `config/environments/*.rb` files for environment-specific configurations.
 - Consult the [Rails Guides](https://guides.rubyonrails.org/) for more detailed information on Rails features and best practices.
+- Use the `bin/dev` script for starting the development server to ensure CSS is correctly applied.
 
 ---
