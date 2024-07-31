@@ -23,6 +23,11 @@ This application is a manga aggregator built using Ruby on Rails 7. It allows us
 - [ ] Recommend manga to a user based on their past interests in some genre
 - [x] Data analytics for the admin to determine which mangas are being read the most by the users and other such details
 
+## Admin Credentials
+
+john@doe.com
+1234
+
 ## Ruby Version
 
 This application is built with Ruby 3.2.0 and Rails 7.0.0. Ensure you have the correct version installed to run the application.
