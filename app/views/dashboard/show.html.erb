@@ -6,7 +6,7 @@
     <div class="col-span-2 bg-gray-100 p-4 border rounded-lg">
     <!-- Display the first image of the manga if available -->
       <% if @manga.images.any? %>
-        <%= image_tag @manga.images.first.link, class: "w-full h-80 object-cover rounded-lg mb-4" %>
+        <%= image_tag @manga.images.first.link, class: "w-full h-90 object-cover rounded-lg mb-4" %>
       <% end %>
       <h1 class="text-xl font-bold mb-2 text-center"><%= @manga.title %></h1>
       <p class="text-gray-600 mb-2">
