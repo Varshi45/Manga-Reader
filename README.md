@@ -15,7 +15,7 @@ This application is a manga aggregator built using Ruby on Rails 7. It allows us
 - [x] Display trending mangas on the homepage
 - [x] View detailed information when a user clicks on a manga
 - [x] Users can like and comment on the mangas
-- [x] Read mangas in a paginated way with a page read tracker
+- [ ] Read mangas in a paginated way with a page read tracker
 - [x] Track likes on the manga, users can rate manga out of 5 stars
 
 ### Additional Requirements (Nice to Have)
